@@ -17,9 +17,14 @@ const App = () => {
     });
   };
   // Function to clear the cart after order
-  const clearCart = () => {
+  
+  const clearCart = (callback) => {
     setCart([]);
+    if (callback) {
+      callback(); // Ensure navigation happens after clearing the cart
+    }
   };
+  
 
   const updateQuantity = (id, quantity) => {
     setCart((prev) => prev.map((item) => (item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item)));
@@ -41,6 +46,7 @@ const App = () => {
           path="/checkout"
           element={cart.length > 0 ? <Checkout clearCart={() => setCart([])} /> : <Navigate to="/" />}
         /> */}
+        
         
         <Route path="/checkout" element={<Checkout cart={cart} clearCart={clearCart} />} />
         

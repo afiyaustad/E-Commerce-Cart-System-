@@ -7,8 +7,9 @@ const ConfirmationAfiya = () => {
       <h2>🎉 Order Confirmed! 🎉</h2>
       <p>Thank you for your order! You will receive an email confirmation shortly.</p>
       <Link to="/">
-        <button>Back to Home</button>
-      </Link>
+        <button className="btn btn-primary mt-3">Back to Home</button>
+     </Link>
+
     </div>
   );
 };

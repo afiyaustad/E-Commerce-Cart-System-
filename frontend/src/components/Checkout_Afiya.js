@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, navigate } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -27,13 +27,13 @@ const Checkout = ({ cart, clearCart }) => {
       <Formik
         initialValues={{ name: "", email: "", address: "" }}
         validationSchema={validationSchema}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            clearCart();
-            navigate("/confirmation");
-            setSubmitting(false);
-          }, 1000);
+        
+        onSubmit={(values, { resetForm }) => {
+          console.log("Order Placed:", values);
+          resetForm();
+          navigate("/confirmation");
         }}
+        
       >
         {({ isSubmitting }) => (
           <Form className="card p-4 shadow-sm">
