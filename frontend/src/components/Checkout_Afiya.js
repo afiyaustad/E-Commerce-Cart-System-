@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Checkout = ({ cart, clearCart }) => {
   const navigate = useNavigate();
@@ -21,39 +22,46 @@ const Checkout = ({ cart, clearCart }) => {
   });
 
   return (
-    <Formik
-      initialValues={{ name: "", email: "", address: "" }}
-      validationSchema={validationSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          clearCart();
-          navigate("/confirmation");
-          setSubmitting(false);
-        }, 1000);
-      }}
-    >
-      {({ isSubmitting }) => (
-        <Form className="checkout-form">
-          <h2>Checkout</h2>
+    <div className="container mt-4">
+      <h2 className="text-center mb-4">Checkout</h2>
+      <Formik
+        initialValues={{ name: "", email: "", address: "" }}
+        validationSchema={validationSchema}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            clearCart();
+            navigate("/confirmation");
+            setSubmitting(false);
+          }, 1000);
+        }}
+      >
+        {({ isSubmitting }) => (
+          <Form className="card p-4 shadow-sm">
+            <div className="mb-3">
+              <label htmlFor="name" className="form-label">Name:</label>
+              <Field name="name" type="text" className="form-control" />
+              <ErrorMessage name="name" component="div" className="text-danger" />
+            </div>
 
-          <label htmlFor="name">Name:</label>
-          <Field name="name" type="text" />
-          <ErrorMessage name="name" component="div" className="error" />
+            <div className="mb-3">
+              <label htmlFor="email" className="form-label">Email:</label>
+              <Field name="email" type="email" className="form-control" />
+              <ErrorMessage name="email" component="div" className="text-danger" />
+            </div>
 
-          <label htmlFor="email">Email:</label>
-          <Field name="email" type="email" />
-          <ErrorMessage name="email" component="div" className="error" />
+            <div className="mb-3">
+              <label htmlFor="address" className="form-label">Address:</label>
+              <Field name="address" as="textarea" className="form-control" rows="3" />
+              <ErrorMessage name="address" component="div" className="text-danger" />
+            </div>
 
-          <label htmlFor="address">Address:</label>
-          <Field name="address" as="textarea" />
-          <ErrorMessage name="address" component="div" className="error" />
-
-          <button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "Processing..." : "Place Order"}
-          </button>
-        </Form>
-      )}
-    </Formik>
+            <button type="submit" className="btn btn-success w-100" disabled={isSubmitting}>
+              {isSubmitting ? "Processing..." : "Place Order"}
+            </button>
+          </Form>
+        )}
+      </Formik>
+    </div>
   );
 };
 

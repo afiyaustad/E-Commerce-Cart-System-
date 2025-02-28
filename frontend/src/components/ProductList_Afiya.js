@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const ProductListAfiya = ({ addToCart }) => {
   const [products, setProducts] = useState([]);
@@ -11,15 +12,21 @@ const ProductListAfiya = ({ addToCart }) => {
   }, []);
 
   return (
-    <div>
-      <h2>Products</h2>
-      <div style={{ display: "flex", gap: "20px" }}>
+    <div className="container mt-4">
+      <h2 className="text-center mb-4">Products</h2>
+      <div className="row">
         {products.map((product) => (
-          <div key={product.id} style={{ border: "1px solid black", padding: "10px" }}>
-            <img src={product.image} alt={product.name} width="100" />
-            <h3>{product.name}</h3>
-            <p>${product.price}</p>
-            <button onClick={() => addToCart(product)}>Add to Cart</button>
+          <div key={product.id} className="col-md-4 mb-4">
+            <div className="card shadow-sm">
+              <img src={product.image} className="card-img-top" alt={product.name} />
+              <div className="card-body text-center">
+                <h5 className="card-title">{product.name}</h5>
+                <p className="card-text">${product.price}</p>
+                <button className="btn btn-primary" onClick={() => addToCart(product)}>
+                  Add to Cart
+                </button>
+              </div>
+            </div>
           </div>
         ))}
       </div>

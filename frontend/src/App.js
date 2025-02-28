@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import ProductList from "./components/ProductList_Afiya";
 import Cart from "./components/Cart_Afiya";
 import Checkout from "./components/Checkout_Afiya";
